@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CheddarOS</title>
+    <title id="page-title"></title>
     <style>
         body, html {
             margin: 0; padding: 0; height: 100%;
@@ -41,7 +41,7 @@
 </head>
 <body onclick="document.getElementById('terminalInput').focus()">
     <div id="terminal-ui">
-        <div class="log-line">CheddarOS [Version 10.0.19045.4291]</div>
+        <div class="log-line" id="version-line"></div>
         <div class="log-line">(c) Cheddar Corporation. All rights reserved.</div>
         <br>
         <div id="history">
@@ -58,6 +58,14 @@
     </div>
 
     <script>
+        // ============================================================
+        // CHEDDAROS VERSION
+        const OS_VERSION = "[v1.5.24]";
+        // ============================================================
+
+        document.getElementById("page-title").innerText = "CheddarOS " + OS_VERSION;
+        document.getElementById("version-line").innerText = "CheddarOS " + OS_VERSION;
+
         let currentState = "LOCKED";
         const gateway = "zyx";
         const CDN = "https://failedrifle.github.io/FNAE-HTML5-1.2.2-fix/";
@@ -79,8 +87,8 @@
         const nzHTML = `<!doctype html><html lang="en-us"><head><base href="https://rawcdn.githack.com/gn-math/assets/main/308/"><meta charset="utf-8"><title>zombies</title><link rel="icon" href="data:,"><style>html,body{background-color:#000;margin:0;padding:0;width:100vw;height:100vh;overflow:hidden;}canvas.emscripten{width:100%;height:100%;display:block;image-rendering:crisp-edges;}#status{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:#555;font-family:monospace;}</style></head><body><div id="status">Initializing...</div><canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas><script type='text/javascript'>var Module={arguments:['-width','1280','-height','720','+vid_pixelscale','2','+r_shadows','0','+r_dynamic','0','+gl_texturemode','gl_nearest','+cl_maxfps','60'],files:{"default.fmf":"default.fmf","nzp/game.pk3":"nzp/game.pk3","nzp/progs.pk3":"nzp/progs.pk3"},canvas:document.getElementById('canvas'),setStatus:function(text){var s=document.getElementById('status');if(s)s.innerHTML=text;if(!text)s.style.display='none';}};(function(){var s=document.createElement('script');s.src="ftewebgl.js";s.async=true;document.head.appendChild(s);})();<\/script></body></html>`;
         const gdHTML = `<!DOCTYPE html><html lang="en-US"> <head><meta charset="utf-8"><title>geometry dash</title> <style> body { margin: 0; background-image: linear-gradient(rgb(0, 0, 0), rgb(0, 102, 255)); overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; } #gameContainer { width: 100vw; height: 100vh; } #loader { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: black; z-index: 10; } .progress { width: 50%; height: 20px; background: #333; border: 2px solid #fff; margin-top: 20px; } .full { width: 100%; height: 100%; background: #00ff00; transform: scaleX(0); transform-origin: left; } </style> </head> <body> <div id="loader"> <div class="progress"> <div class="full" id="progressBar"></div> </div> </div> <div id="gameContainer"></div> <script src="https://rawcdn.githack.com/genizy/google-class/main/gdlite/Build/UnityLoader.js"><\/script> <script> var gameInstance = UnityLoader.instantiate("gameContainer", "https://rawcdn.githack.com/genizy/google-class/main/gdlite/Build/GeometryDashLite.json", { onProgress: UnityProgress }); function UnityProgress(gameInstance, progress) { if (!gameInstance.Module) return; const loader = document.querySelector("#loader"); const progressBar = document.querySelector("#progressBar"); progressBar.style.transform = "scaleX(" + progress + ")"; if (progress === 1) { setTimeout(() => { loader.style.display = "none"; }, 1500); } } <\/script> </body> </html>`;
         const sm64HTML = `<!DOCTYPE html><html lang="en-us"><head><meta charset="utf-8"><title>Super Mario 64</title><style>body,html{margin:0;padding:0;width:100vw;min-height:100vh;font-family:Arial,sans-serif;color:white;background:#000;image-rendering:pixelated;overflow:hidden;}#container{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;}canvas{width:100vw;height:100vh;object-fit:contain;}</style></head><body><div id="container"><canvas class="emscripten" id="canvas"></canvas></div><script>var Module={preRun:[],postRun:[],print:function(t){console.log(t)},printErr:function(t){console.error(t)},canvas:function(){var e=document.getElementById("canvas");return e.width=window.innerWidth,e.height=window.innerHeight,e}(),setStatus:function(t){}};<\/script><script async src="https://cdn.jsdelivr.net/gh/ArkShocer/sm64@main/sm64.us.f3dex2e.js"><\/script></body></html>`;
-        const tapHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Tap Game</title><style>html, body {margin: 0;padding: 0;width: 100%;height: 100%;overflow: hidden;background: black;}iframe {width: 100%;height: 100%;border: 0;}</style></head><body><iframesrc="https://games.construct.net/27703/latest"allow="fullscreen; autoplay; encrypted-media"allowfullscreensandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups"></iframe></body></html>`;        
-        
+        const tapHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Tap Game</title><style>html, body {margin: 0;padding: 0;width: 100%;height: 100%;overflow: hidden;background: black;}iframe {width: 100%;height: 100%;border: 0;}</style></head><body><iframesrc="https://games.construct.net/27703/latest"allow="fullscreen; autoplay; encrypted-media"allowfullscreensandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups"></iframe></body></html>`;
+
         const sites = {
             "fnae": { name: "Five Nights at Epstein's", content: fnaeHTML },
             "geodash": { name: "Geometry Dash Lite", content: gdHTML },
@@ -232,7 +240,7 @@
                     outputBlock.innerHTML += '<div class="log-line">--- CREDITS ---</div>';
                     outputBlock.innerHTML += '<div class="log-line">System Architecture: Cheddar Corporation</div>';
                     outputBlock.innerHTML += '<div class="log-line">Game Porting: Genizy & Web-Ports Contributors</div>';
-                    outputBlock.innerHTML += '<div class="log-line">Kernel: CheddarOS v10.0</div>';
+                    outputBlock.innerHTML += '<div class="log-line">Kernel: CheddarOS [' + OS_VERSION + ']</div>';
                 }
                 else if (userInput === "changelog") {
                     outputBlock.innerHTML += '<div class="log-line">--- CHANGELOG ---</div>';
