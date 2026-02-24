@@ -82,41 +82,36 @@
         const nzHTML = `<!doctype html><html lang="en-us"><head><base href="https://rawcdn.githack.com/gn-math/assets/main/308/"><meta charset="utf-8"><title>zombies</title><link rel="icon" href="data:,"><style>html,body{background-color:#000;margin:0;padding:0;width:100vw;height:100vh;overflow:hidden;}canvas.emscripten{width:100%;height:100%;display:block;image-rendering:crisp-edges;}#status{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:#555;font-family:monospace;}</style></head><body><div id="status">Initializing...</div><canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas><script type='text/javascript'>var Module={arguments:['-width','1280','-height','720','+vid_pixelscale','2','+r_shadows','0','+r_dynamic','0','+gl_texturemode','gl_nearest','+cl_maxfps','60'],files:{"default.fmf":"default.fmf","nzp/game.pk3":"nzp/game.pk3","nzp/progs.pk3":"nzp/progs.pk3"},canvas:document.getElementById('canvas'),setStatus:function(text){var s=document.getElementById('status');if(s)s.innerHTML=text;if(!text)s.style.display='none';}};(function(){var s=document.createElement('script');s.src="ftewebgl.js";s.async=true;document.head.appendChild(s);})();<\/script></body></html>`;
         const gdHTML = `<!DOCTYPE html><html lang="en-US"> <head><meta charset="utf-8"><title>geometry dash</title> <style> body { margin: 0; background-image: linear-gradient(rgb(0, 0, 0), rgb(0, 102, 255)); overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; } #gameContainer { width: 100vw; height: 100vh; } #loader { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: black; z-index: 10; } .progress { width: 50%; height: 20px; background: #333; border: 2px solid #fff; margin-top: 20px; } .full { width: 100%; height: 100%; background: #00ff00; transform: scaleX(0); transform-origin: left; } </style> </head> <body> <div id="loader"> <div class="progress"> <div class="full" id="progressBar"></div> </div> </div> <div id="gameContainer"></div> <script src="https://rawcdn.githack.com/genizy/google-class/main/gdlite/Build/UnityLoader.js"><\/script> <script> var gameInstance = UnityLoader.instantiate("gameContainer", "https://rawcdn.githack.com/genizy/google-class/main/gdlite/Build/GeometryDashLite.json", { onProgress: UnityProgress }); function UnityProgress(gameInstance, progress) { if (!gameInstance.Module) return; const loader = document.querySelector("#loader"); const progressBar = document.querySelector("#progressBar"); progressBar.style.transform = "scaleX(" + progress + ")"; if (progress === 1) { setTimeout(() => { loader.style.display = "none"; }, 1500); } } <\/script> </body> </html>`;
         const sm64HTML = `<!DOCTYPE html><html lang="en-us"><head><meta charset="utf-8"><title>Super Mario 64</title><style>body,html{margin:0;padding:0;width:100vw;min-height:100vh;font-family:Arial,sans-serif;color:white;background:#000;image-rendering:pixelated;overflow:hidden;}#container{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;}canvas{width:100vw;height:100vh;object-fit:contain;}</style></head><body><div id="container"><canvas class="emscripten" id="canvas"></canvas></div><script>var Module={preRun:[],postRun:[],print:function(t){console.log(t)},printErr:function(t){console.error(t)},canvas:function(){var e=document.getElementById("canvas");return e.width=window.innerWidth,e.height=window.innerHeight,e}(),setStatus:function(t){}};<\/script><script async src="https://cdn.jsdelivr.net/gh/ArkShocer/sm64@main/sm64.us.f3dex2e.js"><\/script></body></html>`;
-        const tapHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Tap Game</title><style>html, body {margin: 0;padding: 0;width: 100%;height: 100%;overflow: hidden;background: black;}iframe {width: 100%;height: 100%;border: 0;}</style></head><body><iframesrc="https://games.construct.net/27703/latest"allow="fullscreen; autoplay; encrypted-media"allowfullscreensandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups"></iframe></body></html>`;
+        const tapHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Tap Game</title><style>html, body {margin: 0;padding: 0;width: 100%;height: 100%;overflow: hidden;background: black;}iframe {width: 100%;height: 100%;border: 0;}</style></head><body><iframe src="https://games.construct.net/27703/latest"allow="fullscreen; autoplay; encrypted-media"allowfullscreensandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups"></iframe></body></html>`;
+        const sr3dHTML = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Snow Rider 3D</title><style>body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#000;}.webgl-content{width:100%;height:100%;display:flex;}#gameContainer{width:100%;height:100%;}</style><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/drippy-cat/snowrider3D@c82fe583cbffafa502b0aa3ed2da0053972e0c80/TemplateData/style.css"><script src="https://cdn.jsdelivr.net/gh/drippy-cat/snowrider3D@c82fe583cbffafa502b0aa3ed2da0053972e0c80/TemplateData/UnityProgress.js"><\/script><script src="https://cdn.jsdelivr.net/gh/drippy-cat/snowrider3D@c82fe583cbffafa502b0aa3ed2da0053972e0c80/Build/UnityLoader.js"><\/script></head><body><div class="webgl-content"><div id="gameContainer" style="width:100%;height:100%;margin:auto;"></div></div><script>var gameInstance=UnityLoader.instantiate("gameContainer","https://cdn.jsdelivr.net/gh/drippy-cat/snowrider3D@c82fe583cbffafa502b0aa3ed2da0053972e0c80/Build/SnowRider3D-gd-1.json",{onProgress:UnityProgress,Module:{onRuntimeInitialized:function(){UnityProgress(gameInstance,"complete");}}});<\/script></body></html>`;
 
         const sites = {
-            "fnae":      { name: "Five Nights at Epstein's", enabled: true,  content: fnaeHTML },
-            "geodash":   { name: "Geometry Dash Lite",       enabled: true,  content: gdHTML   },
-            "minecraft": { name: "Minecraft v1.12.2",        enabled: true,  content: mcHTML   },
-            "zombies":   { name: "CoD Zombies",              enabled: true,  content: nzHTML   },
-            "sm64":      { name: "Super Mario 64",           enabled: true,  content: sm64HTML },
-            "potato":    { name: "Throw a Potato",           enabled: false, content: tapHTML  }
+            "fnae": { name: "Five Nights at Epstein's", enabled: true,  content: fnaeHTML },
+            "geodash": { name: "Geometry Dash Lite", enabled: true,  content: gdHTML   },
+            "minecraft": { name: "Minecraft v1.12.2", enabled: true,  content: mcHTML   },
+            "zombies": { name: "CoD Zombies", enabled: true,  content: nzHTML   },
+            "sm64": { name: "Super Mario 64", enabled: true,  content: sm64HTML },
+            "potato": { name: "Throw a Potato", enabled: true, content: tapHTML  },
+            "snowrider": { name: "Snow Rider 3D", enabled: false, content: sr3dHTML  },
         };
 
         const commandDetails = {
             "changelog": "View recent system updates.",
-            "clear":     "Clear the terminal screen.",
-            "credits":   "View the authors and contributors.",
-            "gamelist":  "List all available games.",
-            "help":      "Display this help menu."
+            "clear": "Clear the terminal screen.",
+            "credits": "View the authors and contributors.",
+            "gamelist": "List all available games.",
+            "help": "Display this help menu."
         };
 
-        const inputField  = document.getElementById("terminalInput");
-        const ghostField  = document.getElementById("ghost-input");
+        const inputField = document.getElementById("terminalInput");
+        const ghostField = document.getElementById("ghost-input");
         const historyArea = document.getElementById("history");
-        const ui          = document.getElementById("terminal-ui");
+        const ui = document.getElementById("terminal-ui");
         const allSuggestions = [...Object.keys(commandDetails), ...Object.keys(sites)].sort();
-
-        // ============================================================ \\
-                            // CHEDDAROS UPDATE LOGS \\
-        // ============================================================ \\
 
         function changelog(...entries) {
             return entries.map(e => `<div class="log-line">${e.replaceAll('$', '\n')}</div><div class="log-line"> </div>`).join('');
         }
-
-        // ============================================================ \\
-
         function openInBlank(siteObj) {
             const newWin = window.open('about:blank', '_blank');
             if (!newWin || newWin.closed || typeof newWin.closed == 'undefined') return false;
@@ -240,8 +235,10 @@
             }
             else if (currentState === "COMMAND_MODE") {
                 if (userInput === "help") {
+                    const maxCmdLen = Math.max(...Object.keys(commandDetails).map(k => k.length));
                     for (let cmd in commandDetails) {
-                        outputBlock.innerHTML += '<div class="log-line"> > ' + cmd + ' - ' + commandDetails[cmd] + '</div>';
+                        const padded = cmd.padEnd(maxCmdLen + 4, '\u00A0');
+                        outputBlock.innerHTML += '<div class="log-line"> > ' + padded + commandDetails[cmd] + '</div>';
                     }
                 }
                 else if (userInput === "clear") {
@@ -254,17 +251,27 @@
                     outputBlock.innerHTML += '<div class="log-line">Game Porting: Genizy & Web-Ports Contributors</div>';
                     outputBlock.innerHTML += '<div class="log-line">Kernel: CheddarOS [' + OS_VERSION + ']</div>';
                 }
+
+        // ============================================================ \\
+                            // CHEDDAROS UPDATE LOG \\
+
                 else if (userInput === "changelog") {
                     outputBlock.innerHTML += changelog(
                         "--- CHANGELOG ---",
+                        "2/23/2026$vBETA-1.0.2$- Minor big fixes$- Throw a Potato now playable (sorry about the ads)$- Added Snow Rider 3D but currently being worked on",
                         "2/23/2026$vBETA-1.0.1$- Throw a Potato put under maintenance due to a fatal error",
                         "2/23/2026$vBETA-1.0.0$- CheddarOS initial release."
                     );
                 }
+
+        // ============================================================ \\
+
                 else if (userInput === "gamelist") {
+                    const maxKeyLen = Math.max(...Object.keys(sites).map(k => k.length));
                     for (let key in sites) {
                         const status = sites[key].enabled ? '' : ' [OFFLINE]';
-                        outputBlock.innerHTML += '<div class="log-line" style="color: ' + (sites[key].enabled ? '#CCCCCC' : '#FF5555') + '"> > ' + key + ' (' + sites[key].name + ')' + status + '</div>';
+                        const padded = key.padEnd(maxKeyLen + 4, '\u00A0');
+                        outputBlock.innerHTML += '<div class="log-line" style="color: ' + (sites[key].enabled ? '#CCCCCC' : '#FF5555') + '"> > ' + padded + '(' + sites[key].name + ')' + status + '</div>';
                     }
                 }
                 else if (sites[userInput]) {
