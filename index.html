@@ -62,7 +62,7 @@
         
         // ============================================================ \\
                             // CHEDDAROS VERSION \\
-                         const OS_VERSION = "[v1.0.0]";
+                         const OS_VERSION = "[v1.0.1]";
         // ============================================================ \\
         
 
@@ -257,12 +257,23 @@
                     outputBlock.innerHTML += '<div class="log-line">Game Porting: Genizy & Web-Ports Contributors</div>';
                     outputBlock.innerHTML += '<div class="log-line">Kernel: CheddarOS [' + OS_VERSION + ']</div>';
                 }
-                else if (userInput === "changelog") {
-                    outputBlock.innerHTML += '<div class="log-line">--- CHANGELOG ---</div>';
-                    outputBlock.innerHTML += '<div class="log-line">[v1.2] Added popup blocker error detection.</div>';
-                    outputBlock.innerHTML += '<div class="log-line">[v1.1] Improved "gamelist" formatting and game name display.</div>';
-                    outputBlock.innerHTML += '<div class="log-line">[v1.0] Initial system release.</div>';
-                }
+
+        // ============================================================ \\
+                            // CHEDDAROS UPDATE LOGS \\
+        // ============================================================ \\
+else if (userInput === "changelog") {
+    outputBlock.innerHTML += `<div class="log-line">--- CHANGELOG ---</div>
+<div class="log-line">
+2/23/2026
+vBETA-1.0.1
+- Throw a Potato put under maintenance due to a fatal error
+</div>
+<div class="log-line">
+2/23/2026
+vBETA-1.0.0
+- CheddarOS initial release.
+</div>`;
+}
                 else if (userInput === "gamelist") {
                     for (let key in sites) {
                         const status = sites[key].enabled ? '' : ' [OFFLINE]';
