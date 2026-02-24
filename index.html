@@ -31,11 +31,6 @@
             font-family: 'Consolas', monospace; font-size: 15px;
             pointer-events: none; z-index: 1;
         }
-        .cursor {
-            display: inline-block; width: 8px; height: 15px;
-            background-color: #CCCCCC; animation: blink 1s infinite;
-            vertical-align: middle; margin-left: 2px;
-        }
         @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
     </style>
 </head>
@@ -53,18 +48,15 @@
                 <input type="text" id="terminalInput" autofocus spellcheck="false" autocomplete="off">
                 <div id="ghost-input"></div>
             </div>
-            <span class="cursor"></span>
         </div>
     </div>
 
     <script>
 
-        
         // ============================================================ \\
                             // CHEDDAROS VERSION \\
                          const OS_VERSION = "[v1.0.1]";
         // ============================================================ \\
-        
 
         document.getElementById("page-title").innerText = "CheddarOS " + OS_VERSION;
         document.getElementById("version-line").innerText = "CheddarOS " + OS_VERSION;
@@ -94,32 +86,40 @@
 
         const sites = {
             "fnae":      { name: "Five Nights at Epstein's", enabled: true,  content: fnaeHTML },
-            "geodash":   { name: "Geometry Dash Lite", enabled: true,  content: gdHTML   },
-            "minecraft": { name: "Minecraft v1.12.2", enabled: true,  content: mcHTML   },
-            "zombies":   { name: "CoD Zombies", enabled: true,  content: nzHTML   },
-            "sm64":      { name: "Super Mario 64", enabled: true,  content: sm64HTML },
-            "potato":    { name: "Throw a Potato", enabled: false,  content: tapHTML  }
+            "geodash":   { name: "Geometry Dash Lite",       enabled: true,  content: gdHTML   },
+            "minecraft": { name: "Minecraft v1.12.2",        enabled: true,  content: mcHTML   },
+            "zombies":   { name: "CoD Zombies",              enabled: true,  content: nzHTML   },
+            "sm64":      { name: "Super Mario 64",           enabled: true,  content: sm64HTML },
+            "potato":    { name: "Throw a Potato",           enabled: false, content: tapHTML  }
         };
 
         const commandDetails = {
             "changelog": "View recent system updates.",
-            "clear": "Clear the terminal screen.",
-            "credits": "View the authors and contributors.",
-            "gamelist": "List all available games.",
-            "help": "Display this help menu."
+            "clear":     "Clear the terminal screen.",
+            "credits":   "View the authors and contributors.",
+            "gamelist":  "List all available games.",
+            "help":      "Display this help menu."
         };
 
-        const inputField = document.getElementById("terminalInput");
-        const ghostField = document.getElementById("ghost-input");
+        const inputField  = document.getElementById("terminalInput");
+        const ghostField  = document.getElementById("ghost-input");
         const historyArea = document.getElementById("history");
-        const ui = document.getElementById("terminal-ui");
+        const ui          = document.getElementById("terminal-ui");
         const allSuggestions = [...Object.keys(commandDetails), ...Object.keys(sites)].sort();
+
+        // ============================================================ \\
+                            // CHEDDAROS UPDATE LOGS \\
+        // ============================================================ \\
+
+        function changelog(...entries) {
+            return entries.map(e => `<div class="log-line">${e.replaceAll('$', '\n')}</div><div class="log-line"> </div>`).join('');
+        }
+
+        // ============================================================ \\
 
         function openInBlank(siteObj) {
             const newWin = window.open('about:blank', '_blank');
-            if (!newWin || newWin.closed || typeof newWin.closed == 'undefined') {
-                return false;
-            }
+            if (!newWin || newWin.closed || typeof newWin.closed == 'undefined') return false;
             newWin.document.write(siteObj.content);
             newWin.document.close();
             return true;
@@ -136,7 +136,7 @@
 
             if (!siteData.enabled) {
                 outputBlock.innerHTML += '<div class="log-line" style="color: #FF5555;">ERROR: ' + siteData.name + ' is currently unavailable.</div>';
-                outputBlock.innerHTML += '<div class="log-line" style="color: #FFAA00;">This game is experience a fatal error and will not run.</div>';
+                outputBlock.innerHTML += '<div class="log-line" style="color: #FFAA00;">This game is experiencing a fatal error and will not run.</div>';
                 outputBlock.innerHTML += '<div class="log-line" style="color: #FFAA00;">Please try again later.</div>';
                 isLaunching = false;
                 inputField.disabled = false;
@@ -185,19 +185,16 @@
             const val = inputField.value.toLowerCase();
             if (!val) { ghostField.innerText = ""; return; }
             const match = allSuggestions.find(s => s.startsWith(val));
-            if (match) { ghostField.innerText = val + match.slice(val.length); }
-            else { ghostField.innerText = ""; }
+            ghostField.innerText = match ? val + match.slice(val.length) : "";
         });
 
         inputField.addEventListener('keydown', function(e) {
             if (isLaunching) return;
             if (e.key === 'ArrowUp') {
                 e.preventDefault();
-                if (cmdHistory.length > 0) {
-                    if (historyIdx < cmdHistory.length - 1) {
-                        historyIdx++;
-                        inputField.value = cmdHistory[cmdHistory.length - 1 - historyIdx];
-                    }
+                if (cmdHistory.length > 0 && historyIdx < cmdHistory.length - 1) {
+                    historyIdx++;
+                    inputField.value = cmdHistory[cmdHistory.length - 1 - historyIdx];
                 }
             } else if (e.key === 'ArrowDown') {
                 e.preventDefault();
@@ -235,7 +232,7 @@
                 if (encodedAttempt === gateway) {
                     outputBlock.innerHTML += '<div class="log-line">ACCESS GRANTED. SYSTEM UNLOCKED.</div>';
                     outputBlock.innerHTML += '<div class="log-line">Type "help" for a list of commands.</div>';
-                    outputBlock.innerHTML += '<div class="log-line">Type "changelogs" to see any new updates.</div>';
+                    outputBlock.innerHTML += '<div class="log-line">Type "changelog" to see any new updates.</div>';
                     currentState = "COMMAND_MODE";
                 } else {
                     outputBlock.innerHTML += '<div class="log-line">ACCESS DENIED. INVALID PASSKEY.</div>';
@@ -257,23 +254,13 @@
                     outputBlock.innerHTML += '<div class="log-line">Game Porting: Genizy & Web-Ports Contributors</div>';
                     outputBlock.innerHTML += '<div class="log-line">Kernel: CheddarOS [' + OS_VERSION + ']</div>';
                 }
-
-        // ============================================================ \\
-                            // CHEDDAROS UPDATE LOGS \\
-        // ============================================================ \\
-else if (userInput === "changelog") {
-    outputBlock.innerHTML += `<div class="log-line">--- CHANGELOG ---</div>
-<div class="log-line">
-2/23/2026
-vBETA-1.0.1
-- Throw a Potato put under maintenance due to a fatal error
-</div>
-<div class="log-line">
-2/23/2026
-vBETA-1.0.0
-- CheddarOS initial release.
-</div>`;
-}
+                else if (userInput === "changelog") {
+                    outputBlock.innerHTML += changelog(
+                        "--- CHANGELOG ---",
+                        "2/23/2026$vBETA-1.0.1$- Throw a Potato put under maintenance due to a fatal error",
+                        "2/23/2026$vBETA-1.0.0$- CheddarOS initial release."
+                    );
+                }
                 else if (userInput === "gamelist") {
                     for (let key in sites) {
                         const status = sites[key].enabled ? '' : ' [OFFLINE]';
@@ -288,6 +275,7 @@ vBETA-1.0.0
                     outputBlock.innerHTML += '<div class="log-line">"' + rawInput + '" is not recognized as a valid command.</div>';
                 }
             }
+
             inputField.value = "";
             ui.scrollTop = ui.scrollHeight;
         }
