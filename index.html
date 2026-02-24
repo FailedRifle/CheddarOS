@@ -58,10 +58,13 @@
     </div>
 
     <script>
-        // ============================================================
-        // CHEDDAROS VERSION
-        const OS_VERSION = "[v1.5.24]";
-        // ============================================================
+
+        
+        // ============================================================ \\
+                            // CHEDDAROS VERSION \\
+                         const OS_VERSION = "[v1.0.0]";
+        // ============================================================ \\
+        
 
         document.getElementById("page-title").innerText = "CheddarOS " + OS_VERSION;
         document.getElementById("version-line").innerText = "CheddarOS " + OS_VERSION;
@@ -90,12 +93,12 @@
         const tapHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Tap Game</title><style>html, body {margin: 0;padding: 0;width: 100%;height: 100%;overflow: hidden;background: black;}iframe {width: 100%;height: 100%;border: 0;}</style></head><body><iframesrc="https://games.construct.net/27703/latest"allow="fullscreen; autoplay; encrypted-media"allowfullscreensandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups"></iframe></body></html>`;
 
         const sites = {
-            "fnae": { name: "Five Nights at Epstein's", content: fnaeHTML },
-            "geodash": { name: "Geometry Dash Lite", content: gdHTML },
-            "minecraft": { name: "Minecraft v1.12.2", content: mcHTML },
-            "zombies": { name: "CoD Zombies", content: nzHTML },
-            "sm64": { name: "Super Mario 64", content: sm64HTML },
-            "potato": { name: "Throw a Potato", content: tapHTML }
+            "fnae":      { name: "Five Nights at Epstein's", enabled: true,  content: fnaeHTML },
+            "geodash":   { name: "Geometry Dash Lite", enabled: true,  content: gdHTML   },
+            "minecraft": { name: "Minecraft v1.12.2", enabled: true,  content: mcHTML   },
+            "zombies":   { name: "CoD Zombies", enabled: true,  content: nzHTML   },
+            "sm64":      { name: "Super Mario 64", enabled: true,  content: sm64HTML },
+            "potato":    { name: "Throw a Potato", enabled: false,  content: tapHTML  }
         };
 
         const commandDetails = {
@@ -126,12 +129,24 @@
             isLaunching = true;
             inputField.disabled = true;
             const siteData = sites[siteKey];
-            const totalAssets = siteData.content.length;
-            const duration = Math.min((totalAssets / 300) * 1500, 4000);
 
             const outputBlock = document.createElement("div");
             outputBlock.className = "cmd-output-block";
             historyArea.appendChild(outputBlock);
+
+            if (!siteData.enabled) {
+                outputBlock.innerHTML += '<div class="log-line" style="color: #FF5555;">ERROR: ' + siteData.name + ' is currently unavailable.</div>';
+                outputBlock.innerHTML += '<div class="log-line" style="color: #FFAA00;">This game is experience a fatal error and will not run.</div>';
+                outputBlock.innerHTML += '<div class="log-line" style="color: #FFAA00;">Please try again later.</div>';
+                isLaunching = false;
+                inputField.disabled = false;
+                inputField.focus();
+                ui.scrollTop = ui.scrollHeight;
+                return;
+            }
+
+            const totalAssets = siteData.content.length;
+            const duration = Math.min((totalAssets / 300) * 1500, 4000);
 
             outputBlock.innerHTML += '<div class="log-line">Scanning bitstream for ' + siteData.name + '...</div>';
 
@@ -250,7 +265,8 @@
                 }
                 else if (userInput === "gamelist") {
                     for (let key in sites) {
-                        outputBlock.innerHTML += '<div class="log-line"> > ' + key + ' (' + sites[key].name + ')</div>';
+                        const status = sites[key].enabled ? '' : ' [OFFLINE]';
+                        outputBlock.innerHTML += '<div class="log-line" style="color: ' + (sites[key].enabled ? '#CCCCCC' : '#FF5555') + '"> > ' + key + ' (' + sites[key].name + ')' + status + '</div>';
                     }
                 }
                 else if (sites[userInput]) {
