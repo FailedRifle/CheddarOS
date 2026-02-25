@@ -43,7 +43,7 @@
             <div class="log-line">System is currently LOCKED. Enter passkey:</div>
         </div>
         <div class="input-area">
-            <span class="prompt" id="prompt-text">C:\\Users\\redacted></span>
+            <span class="prompt" id="prompt-text">C:\Users\redacted></span>
             <div class="input-wrapper">
                 <input type="text" id="terminalInput" autofocus spellcheck="false" autocomplete="off">
                 <div id="ghost-input"></div>
@@ -55,7 +55,7 @@
 
         // ============================================================ \\
                             // CHEDDAROS VERSION \\
-                         const OS_VERSION = "[vBETA-1.0.4]";
+                         const OS_VERSION = "[vBETA-1.0.5]";
         // ============================================================ \\
 
         document.getElementById("page-title").innerText = "CheddarOS " + OS_VERSION;
@@ -63,7 +63,7 @@
 
         let currentState = "LOCKED";
         const gateway = "zyx";
-        const CDN = "https://cdn.jsdelivr.net/gh/failedrifle/FNAE-HTML5-1.2.2-fix/";
+        const sr3dCDN = "https://cdn.jsdelivr.net/gh/failedrifle/snowrider3D/";
         let isLaunching = false;
         let cmdHistory = [];
         let historyIdx = -1;
@@ -77,41 +77,42 @@
             }).join('');
         }
 
-        const fnaeHTML = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>fnae</title><base href="` + CDN + `"><link rel="stylesheet" href="` + CDN + `style.css"></head><body><div id="preloader"><div class="preloader-content"><div class="preloader-logo">FIVE NIGHTS<br>AT EPSTEIN'S</div><div class="preloader-spinner"><div class="spinner-ring"></div><div class="spinner-ring"></div><div class="spinner-ring"></div></div><div class="preloader-text">LOADING<span class="loading-dots">...</span></div><div class="preloader-progress"><div class="progress-bar" id="progress-bar"></div></div><div class="preloader-percentage" id="preloader-percentage">0%</div></div></div><div id="game-container"><div id="game-screen"><img id="current-scene" src="" alt="" style="display:none;"><div id="hotspots"></div><div id="ui-overlay"><div id="top-left-ui"><div id="time-display"><span id="time-value">12 AM</span></div><div id="night-display">NIGHT <span id="night-value">1</span></div></div><div id="bottom-right-ui"><div id="oxygen-display"><img src="assets/images/fa3.png" alt="Vent" class="vent-icon"><span id="power-value">100</span><span class="percent-sign">%</span><span class="oxygen-unit">O<sub>2</sub></span></div></div></div></div><div id="camera-panel" class="hidden"><div id="current-cam-label">CAM 11</div><div id="camera-error-label">ERR</div><div id="character-overlay"></div><div id="camera-grid"></div><button id="shock-hawking-btn">ELECTROCUTE</button><button id="play-sound-btn">PLAY SOUND</button><video id="camera-static-video" loop muted playsinline><source src="assets/vedio/202512191935.webm" type="video/webm"></video></div><div id="cutscene" class="hidden"><img src="assets/images/cutscene.png" alt="Cutscene"><div class="cutscene-hint">Click to continue...</div></div><div id="night-intro" class="hidden"><div id="night-intro-text">NIGHT 1</div></div><div id="main-menu"><img id="star-icon" class="hidden" src="assets/images/star.png" alt="Star"><img id="star-icon-2" class="hidden" src="assets/images/star.png" alt="Star 2"><img id="star-icon-3" class="hidden" src="assets/images/star.png" alt="Star 3"><h1>FIVE<br>NIGHTS<br>AT<br>EPSTEIN'S</h1><button id="start-game">NEW GAME</button><button id="continue-game" class="hidden">CONTINUE</button><button id="special-night-btn" class="hidden">EPSTEIN'S SPECIAL NIGHT</button><button id="custom-night-btn" class="hidden">CUSTOM NIGHT</button><div class="copyright">HTML5 remake by CheddarOS</div><div class="version">v1.2.2</div></div><button id="volume-btn" title="Volume Settings">SOUND SETTINGS</button><div id="volume-panel" class="hidden"><h3>VOLUME SETTINGS</h3><div class="volume-item"><label>Master Volume</label><div class="volume-slider-container"><input type="range" id="master-volume" min="0" max="100" value="70"><span class="volume-percent">70%</span></div></div><div class="volume-item"><label>Game Background Music</label><div class="volume-slider-container"><input type="range" id="game-bg-volume" min="0" max="100" value="70"><span class="volume-percent">70%</span></div></div><div class="volume-item"><label>Menu Music</label><div class="volume-slider-container"><input type="range" id="menu-music-volume" min="0" max="100" value="70"><span class="volume-percent">70%</span></div></div><div class="volume-item"><label>Jumpscare Sounds</label><div class="volume-slider-container"><input type="range" id="jumpscare-volume" min="0" max="100" value="70"><span class="volume-percent">70%</span></div></div><div class="volume-item"><label>Trump Vent Crawling</label><div class="volume-slider-container"><input type="range" id="vent-crawling-volume" min="0" max="100" value="70"><span class="volume-percent">70%</span></div></div><button id="close-volume-panel">CLOSE</button></div><div id="custom-night-menu" class="hidden"><h1>CUSTOM NIGHT</h1><div class="custom-night-controls"><div class="ai-control"><div class="ai-name">EPSTEIN</div><div class="ai-slider-container"><button class="ai-btn-minus" data-ai="epstein">-</button><input type="range" id="epstein-slider" class="ai-slider" min="0" max="20" value="0"><button class="ai-btn-plus" data-ai="epstein">+</button></div><div class="ai-value" id="epstein-value">0</div></div><div class="ai-control"><div class="ai-name">TRUMP</div><div class="ai-slider-container"><button class="ai-btn-minus" data-ai="trump">-</button><input type="range" id="trump-slider" class="ai-slider" min="0" max="20" value="0"><button class="ai-btn-plus" data-ai="trump">+</button></div><div class="ai-value" id="trump-value">0</div></div><div class="ai-control"><div class="ai-name">HAWKING</div><div class="ai-slider-container"><button class="ai-btn-minus" data-ai="hawking">-</button><input type="range" id="hawking-slider" class="ai-slider" min="0" max="20" value="0"><button class="ai-btn-plus" data-ai="hawking">+</button></div><div class="ai-value" id="hawking-value">0</div></div></div><div class="custom-night-buttons"><button id="start-custom-night">START</button><button id="back-to-menu">BACK</button></div></div><canvas id="static-canvas"></canvas><audio id="menu-music" loop><source src="assets/sounds/music3.ogg" type="audio/ogg"></audio><div id="game-over" class="hidden"><video id="game-over-static" loop muted playsinline autoplay><source src="assets/vedio/202512191935.webm" type="video/webm"></video><div id="game-over-content"><h2 id="game-over-text"></h2><p id="game-over-subtitle" class="hidden"></p><button id="restart">Restart</button><button id="main-menu-btn">Main Menu</button></div></div><div id="tutorial-overlay" class="hidden"><div id="tutorial-content"><h2>DEFEND YOURSELF AGAINST EPSTEIN</h2><p>EPSTEIN ALWAYS STARTS AT CAM 11. USE THE CAMERA'S AUDIO LURE TO KEEP EPSTEIN FAR AWAY FROM YOU. MAKE SURE THE CAMERA YOU'RE PLAYING THE SOUND IN IS NEXT TO THE CAMERA WHERE EPSTEIN IS. PLAYING SOUND IN ONLY ONE SPOT WILL NOT WORK IF YOU DO IT TWICE OR MORE IN A ROW. USING THE AUDIO LURE TOO MUCH WILL LEAD TO THE CAMERAS BREAKING. TO FIX THEM HEAD TO THE CONTROL PANEL AND RESTART THE CAMERAS LIKE YOU JUST DID. EPSTEIN DOES NOT ATTACK THROUGH THE VENTS SO DON'T BOTHER CLOSING THEM FOR THIS NIGHT.</p><button id="tutorial-got-it">GOT IT</button></div></div></div><script src="` + CDN + `js/GameState.js"><\/script><script src="` + CDN + `js/AssetManager.js"><\/script><script src="` + CDN + `js/UIManager.js"><\/script><script src="` + CDN + `js/CameraSystem.js"><\/script><script src="` + CDN + `js/EnemyAI.js"><\/script><script src="` + CDN + `js/InputHandler.js"><\/script><script src="` + CDN + `js/StaticNoise.js"><\/script><script src="` + CDN + `js/ScaryFaceFlicker.js"><\/script><script src="` + CDN + `js/Game.js"><\/script><script src="` + CDN + `js/main.js"><\/script></body></html>`;
+        const fnaeHTML = `<!DOCTYPE html><html lang="en-us"><head><base href="https://cdn.jsdelivr.net/gh/FailedRifle/fnae@cbada0e/"><meta charset="utf-8"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>fnae</title><link rel="shortcut icon" href="TemplateData/favicon.ico"><link rel="stylesheet" href="TemplateData/style.css"></head><body><div id="unity-container"><canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas><div id="unity-loading-bar"><div id="unity-logo"></div><div id="unity-progress-bar-empty"><div id="unity-progress-bar-full"></div></div></div></div><script>let loadedBytes = 0;async function fetchWithProgress(url) {const response = await fetch(url);const reader = response.body.getReader();let chunks = [];let received = 0;while (true) {const { done, value } = await reader.read();if (done) break;received += value.length;loadedBytes += value.length;chunks.push(value);}let fullBuffer = new Uint8Array(received);let offset = 0;for (let chunk of chunks) {fullBuffer.set(chunk, offset);offset += chunk.length;}return fullBuffer.buffer;}async function mergeFiles(fileParts) {const buffers = await Promise.all(fileParts.map(part => fetchWithProgress(part)));const mergedBlob = new Blob(buffers);return URL.createObjectURL(mergedBlob);}function getParts(file, start, end) {let parts = [];for (let i = start; i <= end; i++) { parts.push(file + ".part" + i); }return parts;}(async () => {const [dataUrl, wasmUrl, webm] = await Promise.all([mergeFiles(getParts("Build/fnae.data", 1, 3)),mergeFiles(getParts("Build/fnae.wasm", 1, 3)),mergeFiles(getParts("StreamingAssets/202512191935.webm", 1, 3)),]);window.randomwebm = webm;const realSrc = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, "src");Object.defineProperty(HTMLMediaElement.prototype, "src", {set(value) {if (typeof value === "string" && (value.includes("202512191935.mp4") || value.includes("202512191935.webm"))) {value = window.randomwebm;}return realSrc.set.call(this, value);},get() { return realSrc.get.call(this); }});var canvas = document.querySelector("#unity-canvas");var loadingBar = document.querySelector("#unity-loading-bar");var progressBarFull = document.querySelector("#unity-progress-bar-full");var config = {arguments: [],dataUrl: dataUrl,frameworkUrl: "Build/fnae.framework.js",codeUrl: wasmUrl,streamingAssetsUrl: "StreamingAssets",companyName: "DefaultCompany",productName: "fnae",productVersion: "1.0",showBanner: function() {},};if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {var meta = document.createElement('meta');meta.name = 'viewport';meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';document.getElementsByTagName('head')[0].appendChild(meta);}loadingBar.style.display = "block";var script = document.createElement("script");script.src = "Build/fnae.loader.js";script.onload = () => {createUnityInstance(canvas, config, (progress) => {progressBarFull.style.width = 100 * progress + "%";}).then((unityInstance) => {loadingBar.style.display = "none";}).catch((message) => { console.error(message); });};document.body.appendChild(script);})();<\/script></body></html>`;
         const mcHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>minecraft v1.12.2</title><script>window.__eaglercraftLoaderClient={container:"game_frame",name:"Eaglercraft 1.12",file:"net.peytonplayz585.eaglercraft.v1_12.client",cid:"bafybeidrnchyech7b26rqhm3tayt7p6mxvl23lzd4f5mcyqda7hbrzyal4",path:"",download:"https://cdn.jsdelivr.net/gh/genizy/mc@main/data/1.12.2.gz",dlSize:15601341,gzip:true};<\/script><script src="https://cdn.jsdelivr.net/gh/genizy/mc@main/shared/loader.js"><\/script><style>body,html{margin:0;width:100%;height:100%;overflow:hidden;background:#000;}</style></head><body><div id="game_frame" style="width:100%;height:100%;"></div></body></html>`;
-        const nzHTML = `<!doctype html><html lang="en-us"><head><base href="https://rawcdn.githack.com/gn-math/assets/main/308/"><meta charset="utf-8"><title>zombies</title><link rel="icon" href="data:,"><style>html,body{background-color:#000;margin:0;padding:0;width:100vw;height:100vh;overflow:hidden;}canvas.emscripten{width:100%;height:100%;display:block;image-rendering:crisp-edges;}#status{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:#555;font-family:monospace;}</style></head><body><div id="status">Initializing...</div><canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas><script type='text/javascript'>var Module={arguments:['-width','1280','-height','720','+vid_pixelscale','2','+r_shadows','0','+r_dynamic','0','+gl_texturemode','gl_nearest','+cl_maxfps','60'],files:{"default.fmf":"default.fmf","nzp/game.pk3":"nzp/game.pk3","nzp/progs.pk3":"nzp/progs.pk3"},canvas:document.getElementById('canvas'),setStatus:function(text){var s=document.getElementById('status');if(s)s.innerHTML=text;if(!text)s.style.display='none';}};(function(){var s=document.createElement('script');s.src="ftewebgl.js";s.async=true;document.head.appendChild(s);})();<\/script></body></html>`;
-        const gdHTML = `<!DOCTYPE html><html lang="en-US"> <head><meta charset="utf-8"><title>geometry dash</title> <style> body { margin: 0; background-image: linear-gradient(rgb(0, 0, 0), rgb(0, 102, 255)); overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; } #gameContainer { width: 100vw; height: 100vh; } #loader { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: black; z-index: 10; } .progress { width: 50%; height: 20px; background: #333; border: 2px solid #fff; margin-top: 20px; } .full { width: 100%; height: 100%; background: #00ff00; transform: scaleX(0); transform-origin: left; } </style> </head> <body> <div id="loader"> <div class="progress"> <div class="full" id="progressBar"></div> </div> </div> <div id="gameContainer"></div> <script src="https://rawcdn.githack.com/genizy/google-class/main/gdlite/Build/UnityLoader.js"><\/script> <script> var gameInstance = UnityLoader.instantiate("gameContainer", "https://rawcdn.githack.com/genizy/google-class/main/gdlite/Build/GeometryDashLite.json", { onProgress: UnityProgress }); function UnityProgress(gameInstance, progress) { if (!gameInstance.Module) return; const loader = document.querySelector("#loader"); const progressBar = document.querySelector("#progressBar"); progressBar.style.transform = "scaleX(" + progress + ")"; if (progress === 1) { setTimeout(() => { loader.style.display = "none"; }, 1500); } } <\/script> </body> </html>`;
+        const nzHTML = `<!doctype html><html lang="en-us"><head><base href="https://rawcdn.githack.com/gn-math/assets/main/308/"><meta charset="utf-8"><title>zombies</title><link rel="icon" href="data:,"><style>html,body{background-color:#000;margin:0;padding:0;width:100vw;height:100vh;overflow:hidden;}canvas.emscripten{width:100%;height:100%;display:block;image-rendering:crisp-edges;}#status{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:#555;font-family:monospace;}</style></head><body><div id="status">Initializing...</div><canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas><script type='text/javascript'>var Module={arguments:['-width','1280','-height','720','+vid_pixelscale','2','+r_shadows','0','+r_dynamic','0','+gl_texturemode','gl_nearest','+cl_maxfps','60'],files:{"default.fmf":"default.fmf","nzp/game.pk3":"nzp/game.pk3","nzp/progs.pk3":"nzp/progs.pk3"},canvas:document.getElementById('canvas'),setStatus:function(text){var s=document.getElementById('status');if(s)s.innerHTML=text;if(!text)s.style.display='none';}};\(function(){var s=document.createElement('script');s.src="ftewebgl.js";s.async=true;document.head.appendChild(s);})()\;<\/script></body></html>`;
+        const gdHTML = `<!DOCTYPE html><html lang="en-US"><head><meta charset="utf-8"><title>geometry dash</title><style>body{margin:0;background-image:linear-gradient(rgb(0,0,0),rgb(0,102,255));overflow:hidden;display:flex;justify-content:center;align-items:center;height:100vh;}#gameContainer{width:100vw;height:100vh;}#loader{position:absolute;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:black;z-index:10;}.progress{width:50%;height:20px;background:#333;border:2px solid #fff;margin-top:20px;}.full{width:100%;height:100%;background:#00ff00;transform:scaleX(0);transform-origin:left;}</style></head><body><div id="loader"><div class="progress"><div class="full" id="progressBar"></div></div></div><div id="gameContainer"></div><script src="https://rawcdn.githack.com/genizy/google-class/main/gdlite/Build/UnityLoader.js"><\/script><script>var gameInstance=UnityLoader.instantiate("gameContainer","https://rawcdn.githack.com/genizy/google-class/main/gdlite/Build/GeometryDashLite.json",{onProgress:UnityProgress});function UnityProgress(gameInstance,progress){if(!gameInstance.Module)return;const loader=document.querySelector("#loader");const progressBar=document.querySelector("#progressBar");progressBar.style.transform="scaleX("+progress+")";if(progress===1){setTimeout(()=>{loader.style.display="none";},1500);}}<\/script></body></html>`;
         const sm64HTML = `<!DOCTYPE html><html lang="en-us"><head><meta charset="utf-8"><title>Super Mario 64</title><style>body,html{margin:0;padding:0;width:100vw;min-height:100vh;font-family:Arial,sans-serif;color:white;background:#000;image-rendering:pixelated;overflow:hidden;}#container{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;}canvas{width:100vw;height:100vh;object-fit:contain;}</style></head><body><div id="container"><canvas class="emscripten" id="canvas"></canvas></div><script>var Module={preRun:[],postRun:[],print:function(t){console.log(t)},printErr:function(t){console.error(t)},canvas:function(){var e=document.getElementById("canvas");return e.width=window.innerWidth,e.height=window.innerHeight,e}(),setStatus:function(t){}};<\/script><script async src="https://cdn.jsdelivr.net/gh/ArkShocer/sm64@main/sm64.us.f3dex2e.js"><\/script></body></html>`;
-        const tapHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Tap Game</title><style>html, body {margin: 0;padding: 0;width: 100%;height: 100%;overflow: hidden;background: black;}iframe {width: 100%;height: 100%;border: 0;}</style></head><body><iframe src="https://games.construct.net/27703/latest"allow="fullscreen; autoplay; encrypted-media"allowfullscreensandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups"></iframe></body></html>`;
-        const sr3dHTML = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Snow Rider 3D</title><style>body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#000;}.webgl-content{width:100%;height:100%;display:flex;}#gameContainer{width:100%;height:100%;}</style><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/drippy-cat/snowrider3D@c82fe583cbffafa502b0aa3ed2da0053972e0c80/TemplateData/style.css"><script src="https://cdn.jsdelivr.net/gh/drippy-cat/snowrider3D@c82fe583cbffafa502b0aa3ed2da0053972e0c80/TemplateData/UnityProgress.js"><\/script><script src="https://cdn.jsdelivr.net/gh/drippy-cat/snowrider3D@c82fe583cbffafa502b0aa3ed2da0053972e0c80/Build/UnityLoader.js"><\/script></head><body><div class="webgl-content"><div id="gameContainer" style="width:100%;height:100%;margin:auto;"></div></div><script>var gameInstance=UnityLoader.instantiate("gameContainer","https://cdn.jsdelivr.net/gh/drippy-cat/snowrider3D@c82fe583cbffafa502b0aa3ed2da0053972e0c80/Build/SnowRider3D-gd-1.json",{onProgress:UnityProgress,Module:{onRuntimeInitialized:function(){UnityProgress(gameInstance,"complete");}}});<\/script></body></html>`;
+        const sr3dHTML = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><base href="${sr3dCDN}"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Snow Rider 3D</title><style>body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#000;}.webgl-content{width:100%;height:100%;display:flex;}#gameContainer{width:100%;height:100%;}</style><link rel="stylesheet" href="${sr3dCDN}TemplateData/style.css"><script src="${sr3dCDN}TemplateData/UnityProgress.js"><\/script><script src="${sr3dCDN}Build/UnityLoader.js"><\/script></head><body><div class="webgl-content"><div id="gameContainer" style="width:100%;height:100%;margin:auto;"></div></div><script>var gameInstance=UnityLoader.instantiate("gameContainer","${sr3dCDN}Build/SnowRider3D-gd-1.json",{onProgress:UnityProgress,Module:{onRuntimeInitialized:function(){UnityProgress(gameInstance,"complete");}}});<\/script></body></html>`;
+        const tapHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Throw a Potato</title><style>html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:black;}iframe{width:100%;height:100%;border:0;}</style></head><body><iframe src="https://script.google.com/macros/s/AKfycbwN-fRMhnn-XH42I-ntRmSjua_dVyuuaFZ3dUEi5bAfXSjWHupafOKIh2xs69q_q2fmLQ/exec" allow="fullscreen; autoplay; encrypted-media" allowfullscreen sandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups"></iframe></body></html>`;
 
         const sites = {
-            "fnae": { name: "Five Nights at Epstein's", enabled: false,  content: fnaeHTML },
-            "geodash": { name: "Geometry Dash Lite", enabled: true,  content: gdHTML   },
-            "minecraft": { name: "Minecraft v1.12.2", enabled: true,  content: mcHTML   },
-            "zombies": { name: "CoD Zombies", enabled: true,  content: nzHTML   },
-            "sm64": { name: "Super Mario 64", enabled: true,  content: sm64HTML },
-            "potato": { name: "Throw a Potato", enabled: false, content: tapHTML  },
-            "snowrider": { name: "Snow Rider 3D", enabled: false, content: sr3dHTML  },
+            "fnae":      { name: "Five Nights at Epstein's", enabled: true,  content: fnaeHTML  },
+            "geodash":   { name: "Geometry Dash Lite",       enabled: true,  content: gdHTML    },
+            "minecraft": { name: "Minecraft v1.12.2",        enabled: true,  content: mcHTML    },
+            "zombies":   { name: "CoD Zombies",              enabled: true,  content: nzHTML    },
+            "sm64":      { name: "Super Mario 64",           enabled: true,  content: sm64HTML  },
+            "potato":    { name: "Throw a Potato",           enabled: true,  content: tapHTML   },
+            "snowrider": { name: "Snow Rider 3D",            enabled: true,  content: sr3dHTML  },
         };
 
         const commandDetails = {
             "changelog": "View recent system updates.",
-            "clear": "Clear the terminal screen.",
-            "credits": "View the authors and contributors.",
-            "gamelist": "List all available games.",
-            "help": "Display this help menu."
+            "clear":     "Clear the terminal screen.",
+            "credits":   "View the authors and contributors.",
+            "gamelist":  "List all available games.",
+            "help":      "Display this help menu."
         };
 
-        const inputField = document.getElementById("terminalInput");
-        const ghostField = document.getElementById("ghost-input");
+        const inputField  = document.getElementById("terminalInput");
+        const ghostField  = document.getElementById("ghost-input");
         const historyArea = document.getElementById("history");
-        const ui = document.getElementById("terminal-ui");
+        const ui          = document.getElementById("terminal-ui");
         const allSuggestions = [...Object.keys(commandDetails), ...Object.keys(sites)].sort();
 
         function changelog(...entries) {
             return entries.map(e => `<div class="log-line">${e.replaceAll('$', '\n')}</div><div class="log-line"> </div>`).join('');
         }
+
         function openInBlank(siteObj) {
             const newWin = window.open('about:blank', '_blank');
             if (!newWin || newWin.closed || typeof newWin.closed == 'undefined') return false;
@@ -130,9 +131,9 @@
             historyArea.appendChild(outputBlock);
 
             if (!siteData.enabled) {
-                outputBlock.innerHTML += '<div class="log-line" style="color: #FF5555;">ERROR: ' + siteData.name + ' is currently unavailable.</div>';
-                outputBlock.innerHTML += '<div class="log-line" style="color: #FFAA00;">This game is experiencing a fatal error and will not run.</div>';
-                outputBlock.innerHTML += '<div class="log-line" style="color: #FFAA00;">Please try again later.</div>';
+                outputBlock.innerHTML += '<div class="log-line" style="color:#FF5555;">ERROR: ' + siteData.name + ' is currently unavailable.</div>';
+                outputBlock.innerHTML += '<div class="log-line" style="color:#FFAA00;">This game is experiencing a fatal error and will not run.</div>';
+                outputBlock.innerHTML += '<div class="log-line" style="color:#FFAA00;">Please try again later.</div>';
                 isLaunching = false;
                 inputField.disabled = false;
                 inputField.focus();
@@ -151,23 +152,22 @@
 
             const startTime = Date.now();
             while (true) {
-                const elapsed = Date.now() - startTime;
+                const elapsed  = Date.now() - startTime;
                 const progress = Math.min(elapsed / duration, 1);
-                const current = Math.floor(progress * totalAssets);
+                const current  = Math.floor(progress * totalAssets);
                 loadLine.innerText = 'LOADING ASSETS: [' + current + '/' + totalAssets + ']';
                 ui.scrollTop = ui.scrollHeight;
                 if (progress >= 1) break;
-                let jitter = (Math.random() > 0.9) ? 60 : 15;
-                await new Promise(r => setTimeout(r, jitter));
+                await new Promise(r => setTimeout(r, Math.random() > 0.9 ? 60 : 15));
             }
 
             const success = openInBlank(siteData);
 
             if (success) {
-                outputBlock.innerHTML += '<div class="log-line" style="color: #00FF00;">' + siteData.name + ' launched successfully.</div>';
+                outputBlock.innerHTML += '<div class="log-line" style="color:#00FF00;">' + siteData.name + ' launched successfully.</div>';
             } else {
-                outputBlock.innerHTML += '<div class="log-line" style="color: #FF5555;">ERROR: Popup was blocked by browser.</div>';
-                outputBlock.innerHTML += '<div class="log-line" style="color: #FF5555;">Please allow popups and type "' + siteKey + '" again.</div>';
+                outputBlock.innerHTML += '<div class="log-line" style="color:#FF5555;">ERROR: Popup was blocked by browser.</div>';
+                outputBlock.innerHTML += '<div class="log-line" style="color:#FF5555;">Please allow popups and type "' + siteKey + '" again.</div>';
             }
 
             isLaunching = false;
@@ -214,8 +214,8 @@
             if (rawInput === "") return;
             cmdHistory.push(rawInput);
             historyIdx = -1;
-            const userInput = rawInput.toLowerCase();
-            const promptText = document.getElementById("prompt-text");
+            const userInput   = rawInput.toLowerCase();
+            const promptText  = document.getElementById("prompt-text");
             const encodedAttempt = atbash(userInput);
 
             historyArea.innerHTML += '<div class="log-line">' + promptText.innerText + ' ' + rawInput + '</div>';
@@ -258,11 +258,12 @@
                 else if (userInput === "changelog") {
                     outputBlock.innerHTML += changelog(
                         "--- CHANGELOG ---",
+                        "2/25/2026$vBETA-1.0.5$- Throw a Potato is finally fixed$- Removed ads inside Throw a Potato$- FNaE revamp$- Fixed Snow Rider 3D black screen after the loading was complete",
                         "2/25/2026$vBETA-1.0.4$-FNaE back online",
                         "2/25/2026$vBETA-1.0.3$- FNaE taken offline$- Throw a Potato back offline cause of GoGuardian",
                         "2/23/2026$vBETA-1.0.2$- Minor big fixes$- Throw a Potato now playable (sorry about the ads)$- Added Snow Rider 3D but currently being worked on",
                         "2/23/2026$vBETA-1.0.1$- Throw a Potato put under maintenance due to a fatal error",
-                        "2/23/2026$vBETA-1.0.0$- CheddarOS initial release."
+                        "2/23/2026$vBETA-1.0.0$- CheddarOS public beta testing release."
                     );
                 }
 
@@ -273,7 +274,7 @@
                     for (let key in sites) {
                         const status = sites[key].enabled ? '' : ' [OFFLINE]';
                         const padded = key.padEnd(maxKeyLen + 4, '\u00A0');
-                        outputBlock.innerHTML += '<div class="log-line" style="color: ' + (sites[key].enabled ? '#CCCCCC' : '#FF5555') + '"> > ' + padded + '(' + sites[key].name + ')' + status + '</div>';
+                        outputBlock.innerHTML += '<div class="log-line" style="color:' + (sites[key].enabled ? '#CCCCCC' : '#FF5555') + '"> > ' + padded + '(' + sites[key].name + ')' + status + '</div>';
                     }
                 }
                 else if (sites[userInput]) {
