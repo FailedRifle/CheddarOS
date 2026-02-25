@@ -86,7 +86,7 @@
         const sr3dHTML = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Snow Rider 3D</title><style>body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#000;}.webgl-content{width:100%;height:100%;display:flex;}#gameContainer{width:100%;height:100%;}</style><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/drippy-cat/snowrider3D@c82fe583cbffafa502b0aa3ed2da0053972e0c80/TemplateData/style.css"><script src="https://cdn.jsdelivr.net/gh/drippy-cat/snowrider3D@c82fe583cbffafa502b0aa3ed2da0053972e0c80/TemplateData/UnityProgress.js"><\/script><script src="https://cdn.jsdelivr.net/gh/drippy-cat/snowrider3D@c82fe583cbffafa502b0aa3ed2da0053972e0c80/Build/UnityLoader.js"><\/script></head><body><div class="webgl-content"><div id="gameContainer" style="width:100%;height:100%;margin:auto;"></div></div><script>var gameInstance=UnityLoader.instantiate("gameContainer","https://cdn.jsdelivr.net/gh/drippy-cat/snowrider3D@c82fe583cbffafa502b0aa3ed2da0053972e0c80/Build/SnowRider3D-gd-1.json",{onProgress:UnityProgress,Module:{onRuntimeInitialized:function(){UnityProgress(gameInstance,"complete");}}});<\/script></body></html>`;
 
         const sites = {
-            "fnae": { name: "Five Nights at Epstein's", enabled: true,  content: fnaeHTML },
+            "fnae": { name: "Five Nights at Epstein's", enabled: false,  content: fnaeHTML },
             "geodash": { name: "Geometry Dash Lite", enabled: true,  content: gdHTML   },
             "minecraft": { name: "Minecraft v1.12.2", enabled: true,  content: mcHTML   },
             "zombies": { name: "CoD Zombies", enabled: true,  content: nzHTML   },
