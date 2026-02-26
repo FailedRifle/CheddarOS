@@ -55,7 +55,7 @@
 
         // ============================================================ \\
                             // CHEDDAROS VERSION \\
-                         const OS_VERSION = "[vBETA-1.0.5]";
+                         const OS_VERSION = "[vBETA-1.0.5b]";
         // ============================================================ \\
 
         document.getElementById("page-title").innerText = "CheddarOS " + OS_VERSION;
@@ -141,7 +141,7 @@
                 return;
             }
 
-            const totalAssets = siteData.content.length;
+            const totalAssets = siteData.content.length / 2;
             const duration = Math.min((totalAssets / 300) * 1500, 4000);
 
             outputBlock.innerHTML += '<div class="log-line">Scanning bitstream for ' + siteData.name + '...</div>';
@@ -258,6 +258,7 @@
                 else if (userInput === "changelog") {
                     outputBlock.innerHTML += changelog(
                         "--- CHANGELOG ---",
+                        "2/26/2026$vBETA-1.0.5b$- Minor bug fixes$- Halfed the loading time on all current and future games.",
                         "2/25/2026$vBETA-1.0.5$- Throw a Potato is finally fixed$- Removed ads inside Throw a Potato$- FNaE revamp$- Fixed Snow Rider 3D black screen after the loading was complete",
                         "2/25/2026$vBETA-1.0.4$-FNaE back online",
                         "2/25/2026$vBETA-1.0.3$- FNaE taken offline$- Throw a Potato back offline cause of GoGuardian",
