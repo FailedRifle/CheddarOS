@@ -141,7 +141,7 @@
                 return;
             }
 
-            const totalAssets = siteData.content.length / 2;
+            const totalAssets = siteData.content.length / 2 - 0.5;
             const duration = Math.min((totalAssets / 300) * 1500, 4000);
 
             outputBlock.innerHTML += '<div class="log-line">Scanning bitstream for ' + siteData.name + '...</div>';
