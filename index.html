@@ -55,7 +55,7 @@
 
         // ============================================================ \\
                             // CHEDDAROS VERSION \\
-                         const OS_VERSION = "[vBETA-1.0.6]";
+                         const OS_VERSION = "[vBETA-1.0.7]";
         // ============================================================ \\
 
         document.getElementById("page-title").innerText = "CheddarOS " + OS_VERSION;
@@ -85,16 +85,18 @@
         const sr3dHTML = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><base href="${sr3dCDN}"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Snow Rider 3D</title><style>body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#000;}.webgl-content{width:100%;height:100%;display:flex;}#gameContainer{width:100%;height:100%;}</style><link rel="stylesheet" href="${sr3dCDN}TemplateData/style.css"><script src="${sr3dCDN}TemplateData/UnityProgress.js"><\/script><script src="${sr3dCDN}Build/UnityLoader.js"><\/script></head><body><div class="webgl-content"><div id="gameContainer" style="width:100%;height:100%;margin:auto;"></div></div><script>var gameInstance=UnityLoader.instantiate("gameContainer","${sr3dCDN}Build/SnowRider3D-gd-1.json",{onProgress:UnityProgress,Module:{onRuntimeInitialized:function(){UnityProgress(gameInstance,"complete");}}});<\/script></body></html>`;
         const tapHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Throw a Potato</title><style>html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:black;}iframe{width:100%;height:100%;border:0;}</style></head><body><iframe src="https://script.google.com/macros/s/AKfycbwN-fRMhnn-XH42I-ntRmSjua_dVyuuaFZ3dUEi5bAfXSjWHupafOKIh2xs69q_q2fmLQ/exec" allow="fullscreen; autoplay; encrypted-media" allowfullscreen sandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups"></iframe></body></html>`;
         const rbHTML = `<!DOCTYPE html><html lang="en"><head><base href="https://cdn.jsdelivr.net/gh/genizy/assets@main/retro-bowl/"><meta charset="utf-8"><title>retro bowl</title><style>body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#000;}canvas{width:100%;height:100%;image-rendering:pixelated;}</style></head><body><div class="gm4html5_div_class" id="gm4html5_div_id"><canvas id="canvas" width="960" height="540"></canvas></div><script src="html5game/RetroBowl.js"><\/script><script>function start(){if(typeof GameMaker_Init==="function"){GameMaker_Init();}else{setTimeout(start,50);}}start();<\/script></body></html>`;        
-       
+        const ssHTML = ``;
+        
         const sites = {
-            "fnae":      { name: "Five Nights at Epstein's", enabled: true,  content: fnaeHTML},
-            "geodash":   { name: "Geometry Dash Lite", enabled: true,  content: gdHTML},
+            "fnae": { name: "Five Nights at Epstein's", enabled: true,  content: fnaeHTML},
+            "geodash": { name: "Geometry Dash Lite", enabled: true,  content: gdHTML},
             "minecraft": { name: "Minecraft v1.12.2", enabled: true,  content: mcHTML},
-            "zombies":   { name: "CoD Zombies", enabled: true,  content: nzHTML},
-            "sm64":      { name: "Super Mario 64", enabled: true,  content: sm64HTML},
-            "potato":    { name: "Throw a Potato", enabled: true,  content: tapHTML },
+            "zombies": { name: "CoD Zombies", enabled: true,  content: nzHTML},
+            "sm64": { name: "Super Mario 64", enabled: true,  content: sm64HTML},
+            "potato": { name: "Throw a Potato", enabled: true,  content: tapHTML },
             "snowrider": { name: "Snow Rider 3D", enabled: true,  content: sr3dHTML},
             "retrobowl": { name: "Retro Bowl", enabled: true,  content: rbHTML},
+            "shellshockers": { name: "Shell Shockers", enabled: false,  content: ssHTML},
         };
 
         const commandDetails = {
@@ -260,6 +262,7 @@
                 else if (userInput === "changelog") {
                     outputBlock.innerHTML += changelog(
                         "--- CHANGELOG ---",
+                        "2/26/2026$vBETA-1.0.7$- Added Shell Shockers$- Shell Shockers offline while working on GoGuardian bypass",
                         "2/26/2025$vBETA-1.0.6$- Added Retro Bowl",
                         "2/26/2026$vBETA-1.0.5b$- Minor bug fixes$- Cut the loading speed in half for all current and future games.",
                         "2/25/2026$vBETA-1.0.5$- Throw a Potato is finally fixed$- Removed ads inside Throw a Potato$- FNaE revamp$- Fixed Snow Rider 3D black screen after the loading was complete",
