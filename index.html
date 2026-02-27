@@ -37,7 +37,7 @@
 <body onclick="document.getElementById('terminalInput').focus()">
     <div id="terminal-ui">
         <div class="log-line" id="version-line"></div>
-        <div class="log-line">(c) Cheddar Corporation. All rights reserved.</div>
+        <div class="log-line">Cheddar Corporation. All rights reserved.</div>
         <br>
         <div id="history">
             <div class="log-line">System is currently LOCKED. Enter passkey:</div>
@@ -55,7 +55,7 @@
 
         // ============================================================ \\
                             // CHEDDAROS VERSION \\
-                         const OS_VERSION = "[vBETA-1.0.7]";
+                         const OS_VERSION = "[vBETA-1.0.8]";
         // ============================================================ \\
 
         document.getElementById("page-title").innerText = "CheddarOS " + OS_VERSION;
@@ -114,7 +114,10 @@
         const allSuggestions = [...Object.keys(commandDetails), ...Object.keys(sites)].sort();
 
         function changelog(...entries) {
-            return entries.map(e => `<div class="log-line">${e.replaceAll('$', '\n')}</div><div class="log-line"> </div>`).join('');
+            return entries.map(e => {
+                const formatted = e.split('$').join('<br>');
+                return `<div class="log-line">${formatted}</div><div class="log-line"> </div>`;
+            }).join('');
         }
 
         function openInBlank(siteObj) {
@@ -250,10 +253,11 @@
                     outputBlock.remove();
                 }
                 else if (userInput === "credits") {
-                    outputBlock.innerHTML += '<div class="log-line">--- CREDITS ---</div>';
-                    outputBlock.innerHTML += '<div class="log-line">System Architecture: Cheddar Corporation</div>';
-                    outputBlock.innerHTML += '<div class="log-line">Game Porting: Genizy & Web-Ports Contributors</div>';
-                    outputBlock.innerHTML += '<div class="log-line">Kernel: CheddarOS ' + OS_VERSION + '</div>';
+                    outputBlock.innerHTML += changelog(
+                        "--- CREDITS ---",
+                        "CheddarOS " + OS_VERSION,
+                        "Lead Programmer$- Cheddar Hobbs",
+                    );
                 }
 
         // ============================================================ \\
@@ -262,6 +266,7 @@
                 else if (userInput === "changelog") {
                     outputBlock.innerHTML += changelog(
                         "--- CHANGELOG ---",
+                        "2/27/2026$vBETA-1.0.8$- Formatted the credits screen",
                         "2/26/2026$vBETA-1.0.7$- Added Shell Shockers$- Shell Shockers offline while working on GoGuardian bypass",
                         "2/26/2025$vBETA-1.0.6$- Added Retro Bowl",
                         "2/26/2026$vBETA-1.0.5b$- Minor bug fixes$- Cut the loading speed in half for all current and future games.",
